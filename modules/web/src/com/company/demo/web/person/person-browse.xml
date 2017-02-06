@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="com.company.demo.web.person.PersonBrowse"
+        focusComponent="personsTable"
+        lookupComponent="personsTable"
+        messagesPack="com.company.demo.web.person">
+    <dsContext>
+        <collectionDatasource id="personsDs"
+                              class="com.company.demo.entity.Person"
+                              view="_local">
+            <query>
+                <![CDATA[select e from demo$Person e]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="personsTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="personsTable"
+                datasource="personsDs">
+            <properties include=".*"/>
+        </filter>
+        <table id="personsTable"
+               editable="true"
+               width="100%">
+            <actions>
+                <action id="create"
+                        caption="Add new"
+                        icon="icons/plus-btn.png"
+                        invoke="addNew"/>
+                <action id="remove"/>
+                <action id="save"
+                        caption="Save all"
+                        icon="icons/save.png"
+                        invoke="saveAll"/>
+            </actions>
+            <columns>
+                <column id="name"
+                        editable="true"/>
+                <column id="age"
+                        editable="true"/>
+            </columns>
+            <rows datasource="personsDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn"
+                        action="personsTable.create"/>
+                <button id="removeBtn"
+                        action="personsTable.remove"/>
+                <button id="saveBtn"
+                        action="personsTable.save"/>
+            </buttonsPanel>
+        </table>
+    </layout>
+</window>
